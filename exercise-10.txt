@@ -1,0 +1,69 @@
+Exercise 10 (Workshop Challenge)
+
+Create a data model representing a Hotel with Floors and Rooms :hotel:
+
+This model should provide answers to the following questions:
+
+The list of Rooms available for rent on a specific date
+
+The list of Rooms which can be occupied by at least 3 people on a specific date
+
+The amount of unrentable Rooms (janitor closets, public laundry room, gym, etc.)
+
+The amount of Rooms having a private Kitchen
+
+The average amount of windows per Floor
+
+The amount of Floors having Rooms with carpets
+
+
+mysql> CREATE DATABASE hotel;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE hotel;
+Database changed
+
+mysql> CREATE TABLE Floors (id INT auto_increment primary key, numRooms INT, numWindows INT, carpeted BIT);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW COLUMNS FROM Floors;
++------------+---------+------+-----+---------+----------------+
+| Field      | Type    | Null | Key | Default | Extra          |
++------------+---------+------+-----+---------+----------------+
+| id         | int(11) | NO   | PRI | NULL    | auto_increment |
+| numRooms   | int(11) | YES  |     | NULL    |                |
+| numWindows | int(11) | YES  |     | NULL    |                |
+| carpeted   | bit(1)  | YES  |     | NULL    |                |
++------------+---------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Rooms (id INT auto_increment primary key, roomNum INT, type ENUM("1-2", "3+", "Unrentable"), privKitchen BIT, floorId INT, FOREIGN KEY (floorId) REFERENCES Floors (id));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW COLUMNS FROM Rooms;
++-------------+-------------------------------+------+-----+---------+----------------+
+| Field       | Type                          | Null | Key | Default | Extra          |
++-------------+-------------------------------+------+-----+---------+----------------+
+| id          | int(11)                       | NO   | PRI | NULL    | auto_increment |
+| roomNum     | int(11)                       | YES  |     | NULL    |                |
+| type        | enum('1-2','3+','Unrentable') | YES  |     | NULL    |                |
+| privKitchen | bit(1)                        | YES  |     | NULL    |                |
+| floorId     | int(11)                       | YES  | MUL | NULL    |                |
++-------------+-------------------------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Vancancy (id INT auto_increment primary key, checkIn DATETIME, checkOut DATETIME, availability BIT, roomId INT, FOREIGN KEY (roomId) REFERENCES Rooms (id));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW COLUMNS FROM Vancancy;
++--------------+----------+------+-----+---------+----------------+
+| Field        | Type     | Null | Key | Default | Extra          |
++--------------+----------+------+-----+---------+----------------+
+| id           | int(11)  | NO   | PRI | NULL    | auto_increment |
+| checkIn      | datetime | YES  |     | NULL    |                |
+| checkOut     | datetime | YES  |     | NULL    |                |
+| availability | bit(1)   | YES  |     | NULL    |                |
+| roomId       | int(11)  | YES  | MUL | NULL    |                |
++--------------+----------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
