@@ -1,0 +1,38 @@
+Exercise 9
+
+Create a data model representing a Barn with Chickens :hatching_chick:
+This model should provide answers to the following questions:
+How many rooster, hen and chicks existed in the Barn on a specific date
+How many chicks will come to age on a specific date
+
+mysql> CREATE DATABASE barn;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE barn;
+Database changed
+
+mysql> CREATE TABLE hatching_chick(id INT auto_increment primary key);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE hatching_chick ADD COLUMN birthday DATETIME;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE hatching_chick ADD COLUMN gender ENUM("male", "female");
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE hatching_chick ADD COLUMN type ENUM("rooster", "hen", "chick");
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE hatching_chick;
++----------+-------------------------------+------+-----+---------+----------------+
+| Field    | Type                          | Null | Key | Default | Extra          |
++----------+-------------------------------+------+-----+---------+----------------+
+| id       | int(11)                       | NO   | PRI | NULL    | auto_increment |
+| birthday | datetime                      | YES  |     | NULL    |                |
+| gender   | enum('male','female')         | YES  |     | NULL    |                |
+| type     | enum('rooster','hen','chick') | YES  |     | NULL    |                |
++----------+-------------------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
