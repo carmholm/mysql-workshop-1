@@ -29,3 +29,24 @@ mysql> SHOW DATABASES;
 | phpmyadmin            |
 +-----------------------+
 6 rows in set (0.01 sec)
+
+Exercise 5
+Create table Account for database decodemtl_addressbook
+Create table AddressBook for database decodemtl_addressbook
+Create table Entry for database decodemtl_addressbook
+Create table Test for database decodemtl_addressbook
+
+mysql> USE decodemtl_addressbook;
+Database changed
+
+mysql> CREATE TABLE Account (id INT auto_increment primary key);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE AddressBook (id INT auto_increment primary key);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE Entry (id INT auto_increment primary key);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Test (id INT auto_increment primary key);
+Query OK, 0 rows affected (0.00 sec)
